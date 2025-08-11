@@ -1,0 +1,147 @@
+/** @format */
+@import "variables";
+@import "functions";
+
+// Theme configuration
+$themes: (
+  "light": (
+    "color-background": #ffffff,
+    "color-surface": #f8f9fa,
+    "color-text": #212529,
+    "color-text-muted": #6c757d,
+    "color-border": #dee2e6,
+    "color-primary": #{$primary},
+    "color-success": #{$success},
+    "color-warning": #{$warning},
+    "color-danger": #{$danger},
+    "shadow-sm": 0 1px 2px 0 rgb(0 0 0 / 0.05),
+    "shadow-md": 0 4px 6px -1px rgb(0 0 0 / 0.1),
+    "shadow-lg": 0 10px 15px -3px rgb(0 0 0 / 0.1),
+  ),
+  "dark": (
+    "color-background": #1a1a1a,
+    "color-surface": #2d2d2d,
+    "color-text": #ffffff,
+    "color-text-muted": #a0a0a0,
+    "color-border": #404040,
+    "color-primary": #{color-lighten($primary, 20%)},
+    "color-success": #{color-lighten($success, 20%)},
+    "color-warning": #{color-lighten($warning, 20%)},
+    "color-danger": #{color-lighten($danger, 20%)},
+    "shadow-sm": 0 1px 2px 0 rgb(0 0 0 / 0.3),
+    "shadow-md": 0 4px 6px -1px rgb(0 0 0 / 0.4),
+    "shadow-lg": 0 10px 15px -3px rgb(0 0 0 / 0.4),
+  ),
+  "high-contrast": (
+    "color-background": #ffffff,
+    "color-surface": #ffffff,
+    "color-text": #000000,
+    "color-text-muted": #000000,
+    "color-border": #000000,
+    "color-primary": #000000,
+    "color-success": #000000,
+    "color-warning": #000000,
+    "color-danger": #000000,
+    "shadow-sm": none,
+    "shadow-md": none,
+    "shadow-lg": none,
+  ),
+);
+
+// Theme mixin
+@mixin theme($theme-name) {
+  @if map-has-key($themes, $theme-name) {
+    $theme: map-get($themes, $theme-name);
+    
+    @each $property, $value in $theme {
+      --#{$property}: #{$value};
+    }
+  }
+}
+
+// Apply themes
+:root {
+  @include theme("light");
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include theme("dark");
+  }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  :root {
+    @include theme("high-contrast");
+  }
+}
+
+// Theme classes for manual switching
+.theme-light {
+  @include theme("light");
+}
+
+.theme-dark {
+  @include theme("dark");
+}
+
+.theme-high-contrast {
+  @include theme("high-contrast");
+}
+
+// Modern color palette variations
+.color-palette {
+  &--primary {
+    --color-primary-50: #{color-lighten($primary, 45%)};
+    --color-primary-100: #{color-lighten($primary, 40%)};
+    --color-primary-200: #{color-lighten($primary, 30%)};
+    --color-primary-300: #{color-lighten($primary, 20%)};
+    --color-primary-400: #{color-lighten($primary, 10%)};
+    --color-primary-500: #{$primary};
+    --color-primary-600: #{color-darken($primary, 10%)};
+    --color-primary-700: #{color-darken($primary, 20%)};
+    --color-primary-800: #{color-darken($primary, 30%)};
+    --color-primary-900: #{color-darken($primary, 40%)};
+  }
+  
+  &--success {
+    --color-success-50: #{color-lighten($success, 45%)};
+    --color-success-100: #{color-lighten($success, 40%)};
+    --color-success-200: #{color-lighten($success, 30%)};
+    --color-success-300: #{color-lighten($success, 20%)};
+    --color-success-400: #{color-lighten($success, 10%)};
+    --color-success-500: #{$success};
+    --color-success-600: #{color-darken($success, 10%)};
+    --color-success-700: #{color-darken($success, 20%)};
+    --color-success-800: #{color-darken($success, 30%)};
+    --color-success-900: #{color-darken($success, 40%)};
+  }
+  
+  &--danger {
+    --color-danger-50: #{color-lighten($danger, 45%)};
+    --color-danger-100: #{color-lighten($danger, 40%)};
+    --color-danger-200: #{color-lighten($danger, 30%)};
+    --color-danger-300: #{color-lighten($danger, 20%)};
+    --color-danger-400: #{color-lighten($danger, 10%)};
+    --color-danger-500: #{$danger};
+    --color-danger-600: #{color-darken($danger, 10%)};
+    --color-danger-700: #{color-darken($danger, 20%)};
+    --color-danger-800: #{color-darken($danger, 30%)};
+    --color-danger-900: #{color-darken($danger, 40%)};
+  }
+}
+
+// Modern semantic color utilities
+.bg-surface { background-color: var(--color-surface); }
+.bg-elevated { 
+  background-color: var(--color-background);
+  box-shadow: var(--shadow-sm);
+}
+
+.text-primary { color: var(--color-primary); }
+.text-muted { color: var(--color-text-muted); }
+
+.border-subtle { border-color: var(--color-border); }
+.border-emphasis { border-color: var(--color-primary); } 

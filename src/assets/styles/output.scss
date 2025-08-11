@@ -1,0 +1,22 @@
+/**
+ * /*
+ *
+ * @format
+ * @title CSS Declearations
+ * @dscription import all css files in here
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+
+@import url("./partials/_variables.scss");
+@import url("./partials/_functions.scss");
+@import url("./partials/_mixins.scss");
+@import url("./partials/_buttons.scss");
+@import "~bootstrap/scss/bootstrap.scss";
+@import url("./global.scss");
+@import url("./components/form.scss");
+@import url("./components/table.scss");
+@import url("./components/dashboard.scss");
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBIiwiZmlsZSI6Im91dHB1dC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiAvKlxuICpcbiAqIEBmb3JtYXRcbiAqIEB0aXRsZSBDU1MgRGVjbGVhcmF0aW9uc1xuICogQGRzY3JpcHRpb24gaW1wb3J0IGFsbCBjc3MgZmlsZXMgaW4gaGVyZVxuICovXG5cbkBpbXBvcnQgdXJsKCdodHRwczovL2ZvbnRzLmdvb2dsZWFwaXMuY29tL2NzczI/ZmFtaWx5PVJhbGV3YXk6d2dodEAzMDA7NDAwOzUwMDs2MDAmZGlzcGxheT1zd2FwJyk7XG5AaW1wb3J0IHVybCgnaHR0cHM6Ly9mb250cy5nb29nbGVhcGlzLmNvbS9jc3MyP2ZhbWlseT1Qb3BwaW5zOndnaHRANTAwJmRpc3BsYXk9c3dhcCcpO1xuXG5cbkBpbXBvcnQgdXJsKCcuL3BhcnRpYWxzL192YXJpYWJsZXMuc2NzcycpO1xuQGltcG9ydCB1cmwoJy4vcGFydGlhbHMvX2Z1bmN0aW9ucy5zY3NzJyk7XG5AaW1wb3J0IHVybCgnLi9wYXJ0aWFscy9fbWl4aW5zLnNjc3MnKTtcbkBpbXBvcnQgdXJsKCcuL3BhcnRpYWxzL19idXR0b25zLnNjc3MnKTtcbkBpbXBvcnQgJ35ib290c3RyYXAvc2Nzcy9ib290c3RyYXAuc2Nzcyc7XG5AaW1wb3J0IHVybCgnLi9nbG9iYWwuc2NzcycpO1xuQGltcG9ydCB1cmwoJy4vY29tcG9uZW50cy9mb3JtLnNjc3MnKTtcbkBpbXBvcnQgdXJsKCcuL2NvbXBvbmVudHMvdGFibGUuc2NzcycpO1xuQGltcG9ydCB1cmwoJy4vY29tcG9uZW50cy9kYXNoYm9hcmQuc2NzcycpO1xuIl19 */

@@ -1,0 +1,249 @@
+/** @format */
+
+@import "../partials/variables";
+@import "../partials/functions";
+
+.payment {
+	padding: 1.2rem 1.25rem;
+	font-weight: 900 !important;
+	font-family: Raleway, sans-serif;
+	font-size: 5rem;
+}
+
+.form-control-sm {
+	height: 35px !important;
+	padding: 5px 15px 5px 15px !important;
+	border-radius: 6px !important;
+	font-size: 0.8rem !important;
+
+	&::placeholder {
+		font-size: 0.8rem !important;
+	}
+}
+
+.form-control,
+.form-select {
+	height: 56px;
+	background: $white !important;
+	outline: none !important;
+	border: 1px solid #d1d1d1;
+	color: $dark-50 !important;
+	font-size: 1rem;
+	border-radius: 14px;
+
+	&::placeholder {
+		color: $dark-50;
+		font-size: 1rem;
+	}
+
+	&:focus {
+		border: 1px solid $primary !important;
+	}
+
+	&__initial {
+		height: initial !important;
+	}
+}
+
+.w-auth {
+	width: rfs(450, 330);
+
+	@media (min-width: 1440px) {
+		width: 450px;
+	}
+}
+
+.back {
+	position: relative;
+	top: 30px;
+}
+
+.btn {
+	height: 56px !important;
+	font-size: 1.125rem !important;
+	border-radius: 14px !important;
+
+	&-light {
+		border-width: 0.7px !important;
+	}
+
+	&__initial {
+		height: initial !important;
+	}
+
+	&__sm {
+		font-size: 1rem !important;
+	}
+
+	&__xs {
+		font-size: 0.8rem !important;
+		height: 35px !important;
+		padding: 3px 15px 5px 15px !important;
+		border-radius: 6px !important;
+	}
+
+	&__md {
+		font-size: 1.25rem !important;
+	}
+
+	&-invite {
+		font-size: 1.35rem !important;
+	}
+}
+
+.toggler {
+	top: 20px;
+}
+
+// Checkbox stylings
+.form-control[type="checkbox"] + label:before {
+	border: 1px solid $dark-50;
+	content: "\00a0";
+	display: inline-block;
+	font: 18px/1em sans-serif;
+	margin: 0 0.5em 0 0;
+	height: 20px;
+	width: 20px;
+}
+
+.form-control[type="checkbox"]:checked + label:before {
+	color: $success;
+	content: "\2714";
+	text-align: center;
+}
+
+.checkbox {
+	position: relative;
+	top: -5px;
+	left: -2px;
+}
+
+.search-container {
+	position: relative;
+	display: inline-block;
+	margin: 4px 2px;
+	height: 50px;
+	width: 50px;
+	vertical-align: bottom;
+}
+
+.searchbutton {
+	position: absolute;
+	font-size: 22px;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.search:focus + .searchbutton {
+	transition-duration: 0.4s;
+	-moz-transition-duration: 0.4s;
+	-webkit-transition-duration: 0.4s;
+	-o-transition-duration: 0.4s;
+	background-color: white;
+	color: black;
+}
+
+.search {
+	position: absolute;
+	left: 49px;
+	background-color: white;
+	outline: none;
+	border: none;
+	padding: 0;
+	width: 0;
+	height: 100%;
+	z-index: 10;
+	transition-duration: 0.4s;
+	-moz-transition-duration: 0.4s;
+	-webkit-transition-duration: 0.4s;
+	-o-transition-duration: 0.4s;
+}
+
+.search:focus {
+	width: 363px;
+	padding: 0 16px 0 0;
+}
+
+.expandright {
+	left: auto;
+	right: 49px;
+}
+
+.expandright:focus {
+	padding: 0 0 0 16px;
+}
+
+.upload-btn-wrapper {
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	border-color: #000;
+	border-width: 1px;
+}
+
+.upload-btn-wrapper input[type="file"] {
+	font-size: 13px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+}
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+/* The slider */
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	transition: 0.4s;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+	background-color: white;
+	transition: 0.4s;
+}
+
+input:checked + .slider {
+	background-color: #15b22f;
+}
+
+input:focus + .slider {
+	box-shadow: 0 0 1px #15b22f;
+}
+
+input:checked + .slider:before {
+	transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+	border-radius: 34px;
+}
+
+.slider.round:before {
+	border-radius: 50%;
+}

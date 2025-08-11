@@ -1,0 +1,1612 @@
+ENTERPRISE DASHBOARD - COMPLETE PROJECT DOCUMENTATION
+================================================================================
+
+TABLE OF CONTENTS
+================================================================================
+
+1. PROJECT OVERVIEW
+2. TECHNOLOGY STACK
+3. COMPLETE PROJECT STRUCTURE
+4. FILE-BY-FILE DOCUMENTATION
+5. ARCHITECTURE OVERVIEW
+6. SETUP & INSTALLATION
+7. DEVELOPMENT WORKFLOW
+8. COMPONENT DOCUMENTATION
+9. STATE MANAGEMENT
+10. ROUTING SYSTEM
+11. API INTEGRATION
+12. BUILD & DEPLOYMENT
+13. DOCKER CONFIGURATION
+14. CODE QUALITY STANDARDS
+15. TROUBLESHOOTING GUIDE
+16. MAINTENANCE & SUPPORT
+
+================================================================================
+1. PROJECT OVERVIEW
+================================================================================
+
+PROJECT NAME: Enterprise Dashboard
+VERSION: 1.0.0
+DESCRIPTION: A React-based enterprise-level web application for data visualization and user management
+
+KEY FEATURES:
+• Authentication System (Login, Password Reset, Session Management)
+• Dashboard Analytics with Multiple Chart Types
+• User Management (Profiles, Activity Tracking, Administration)
+• Responsive Design using Bootstrap
+• Real-time Data via GraphQL Integration
+• Role-based Access Control with Protected Routes
+• Comprehensive Reporting System
+• Settings and Configuration Management
+
+TARGET AUDIENCE: Enterprise users requiring data visualization and user management capabilities
+
+================================================================================
+2. TECHNOLOGY STACK
+================================================================================
+
+FRONTEND TECHNOLOGIES:
+• React 18.2.0 - Core UI Framework
+• React Router DOM 5.2.0 - Client-side Routing
+• Redux 5.0.0 - State Management
+• Bootstrap 5.3.2 - UI Framework
+• React Bootstrap 2.9.1 - Bootstrap Components for React
+• ApexCharts 4.7.0 - Data Visualization Library
+• GraphQL 16.11.0 - API Query Language
+• Apollo Client 3.13.8 - GraphQL Client
+• Axios 1.6.2 - HTTP Client
+• React Spinners 0.13.8 - Loading Components
+• Feather Icons React 0.6.2 - Icon Library
+
+DEVELOPMENT TOOLS:
+• Webpack 5.89.0 - Module Bundler
+• Babel 7.23.6 - JavaScript Compiler
+• ESLint 8.55.0 - Code Linting
+• Prettier 3.1.1 - Code Formatting
+• Sass 1.89.2 - CSS Preprocessor
+• Node.js 16 - Runtime Environment
+
+INFRASTRUCTURE:
+• Docker - Containerization
+• Nginx - Web Server and Reverse Proxy
+• GitLab CI/CD - Continuous Integration/Deployment
+
+================================================================================
+3. COMPLETE PROJECT STRUCTURE
+================================================================================
+
+enterprise-dashboard/
+├── .git/                          # Git version control
+├── .vscode/                       # VS Code configuration
+├── build/                         # Production build output
+├── node_modules/                  # Dependencies (generated)
+├── public/                        # Static assets
+├── src/                           # Source code
+│   ├── assets/                    # Images, fonts, styles
+│   ├── components/                # Reusable UI components
+│   │   ├── charts/               # Chart components
+│   │   │   ├── BoxAndWhiskers.js
+│   │   │   ├── BoxPlot.jsx
+│   │   │   ├── BoxWhisker.jsx
+│   │   │   ├── CircularProgressbar.jsx
+│   │   │   ├── HorizontalChart.jsx
+│   │   │   ├── MultiBar.jsx
+│   │   │   ├── MultiLine.jsx
+│   │   │   ├── PieChart.jsx
+│   │   │   ├── SingleSpiral.jsx
+│   │   │   ├── SpiralChart.jsx
+│   │   │   ├── VerticalChart.jsx
+│   │   │   └── more-horizontal.svg
+│   │   ├── dashboard/            # Dashboard-specific components
+│   │   │   ├── DashboardComponent.jsx
+│   │   │   ├── Dropdown.jsx
+│   │   │   ├── NotificationComponent.jsx
+│   │   │   ├── ProfilePane.jsx
+│   │   │   ├── Sidebar.jsx
+│   │   │   ├── SidebarLink.jsx
+│   │   │   └── TabComponent.jsx
+│   │   ├── Alert.jsx
+│   │   ├── AppModal.jsx
+│   │   ├── AuthComponent.jsx
+│   │   ├── Buttons.jsx
+│   │   ├── CardComponent.jsx
+│   │   ├── Inputs.jsx
+│   │   ├── Label.jsx
+│   │   ├── Loader.jsx
+│   │   └── Paginate.jsx
+│   ├── pages/                    # Page components
+│   │   ├── auth/                 # Authentication pages
+│   │   ├── dashboard/            # Dashboard pages
+│   │   │   ├── components/
+│   │   │   ├── DashboardTab.jsx
+│   │   │   ├── Foster.jsx
+│   │   │   ├── InHome.jsx
+│   │   │   ├── OutHome.jsx
+│   │   │   └── Overview.jsx
+│   │   ├── reports/              # Reporting pages
+│   │   ├── settings/             # Settings pages
+│   │   ├── users/                # User management pages
+│   │   └── pages.jsx
+│   ├── reduxes/                  # Redux state management
+│   │   ├── actions/              # Redux actions
+│   │   │   ├── auth.js
+│   │   │   ├── data.js
+│   │   │   ├── history.js
+│   │   │   ├── setting.js
+│   │   │   └── user.js
+│   │   ├── reducers/             # Redux reducers
+│   │   │   ├── authReducer.jsx
+│   │   │   ├── dataReducer.jsx
+│   │   │   ├── rootReducer.jsx
+│   │   │   ├── types.js
+│   │   │   └── userReducer.jsx
+│   │   ├── localStorage.js
+│   │   └── store.js
+│   ├── router/                   # Routing configuration
+│   │   ├── AuthRoute.jsx
+│   │   ├── UnAuthRoute.jsx
+│   │   └── routes.jsx
+│   ├── utils/                    # Utility functions
+│   ├── graphql/                  # GraphQL queries and mutations
+│   ├── App.jsx                   # Main application component
+│   ├── index.jsx                 # Application entry point
+│   ├── reportWebVitals.js
+│   ├── setupTests.js
+│   └── srvConfig.js
+├── .babelrc.js                   # Babel configuration
+├── .dockerignore                 # Docker ignore file
+├── .eslintrc                     # ESLint configuration
+├── .gitignore                    # Git ignore file
+├── .gitlab-ci.yml                # GitLab CI/CD configuration
+├── .prettierrc                   # Prettier configuration
+├── dev.Dockerfile                # Development Docker configuration
+├── docker-compose.yml            # Docker Compose configuration
+├── docker-config.json            # Docker configuration
+├── jsconfig.json                 # JavaScript configuration
+├── mock-server.js                # Mock server for development
+├── nginx.conf                    # Nginx configuration
+├── package-lock.json             # Dependency lock file
+├── package.json                  # Project dependencies and scripts
+├── simple-mock-server.js         # Simple mock server
+├── webpack.config.js             # Webpack configuration
+└── README.md                     # Basic project documentation
+
+================================================================================
+4. FILE-BY-FILE DOCUMENTATION
+================================================================================
+
+ROOT LEVEL FILES:
+================
+
+package.json
+PURPOSE: Project configuration and dependencies
+CONTENTS: 
+- Project metadata (name, version, description)
+- Scripts for development, build, linting, formatting
+- Dependencies (React, Redux, Bootstrap, ApexCharts, etc.)
+- DevDependencies (Webpack, Babel, ESLint, etc.)
+
+webpack.config.js
+PURPOSE: Webpack bundler configuration
+CONTENTS:
+- Entry point configuration
+- Module rules for JS/JSX, SCSS, assets
+- Resolve aliases for clean imports
+- Development and production plugins
+- Output configuration
+- Dev server settings
+
+.babelrc.js
+PURPOSE: Babel compiler configuration
+CONTENTS:
+- Presets for React and environment
+- Plugin configurations
+- Module resolver settings
+
+.eslintrc
+PURPOSE: ESLint code linting configuration
+CONTENTS:
+- Parser settings for React
+- Plugin configurations
+- Code quality rules
+- Import order rules
+
+.prettierrc
+PURPOSE: Prettier code formatting configuration
+CONTENTS:
+- Tab width settings
+- Quote preferences
+- Semicolon rules
+- Trailing comma settings
+
+jsconfig.json
+PURPOSE: JavaScript language service configuration
+CONTENTS:
+- Compiler options
+- Include/exclude paths
+- Module resolution settings
+
+DOCKER FILES:
+=============
+
+Dockerfile
+PURPOSE: Production Docker container configuration
+CONTENTS:
+- Multi-stage build process
+- Node.js 16 Alpine base image
+- Build environment setup
+- Nginx production server
+- Static file serving configuration
+
+dev.Dockerfile
+PURPOSE: Development Docker container configuration
+CONTENTS:
+- Node.js 16 Alpine base image
+- Development dependencies
+- Volume mounting for hot reload
+- Development server configuration
+
+docker-compose.yml
+PURPOSE: Multi-container Docker application
+CONTENTS:
+- Enterprise dashboard service
+- Certbot SSL certificate service
+- Port mappings
+- Volume configurations
+- Environment variables
+
+nginx.conf
+PURPOSE: Nginx web server configuration
+CONTENTS:
+- Server block configuration
+- Static file serving
+- Gzip compression
+- Security headers
+
+CONFIGURATION FILES:
+===================
+
+.gitignore
+PURPOSE: Git ignore patterns
+CONTENTS:
+- Node modules
+- Build directories
+- Environment files
+- Log files
+- IDE files
+
+.gitlab-ci.yml
+PURPOSE: GitLab CI/CD pipeline configuration
+CONTENTS:
+- Build stages
+- Test configurations
+- Deployment scripts
+- Environment variables
+
+docker-config.json
+PURPOSE: Docker-specific configuration
+CONTENTS:
+- Container settings
+- Network configurations
+
+MOCK SERVERS:
+============
+
+mock-server.js
+PURPOSE: Development mock server
+CONTENTS:
+- Express server setup
+- Mock API endpoints
+- CORS configuration
+- Authentication simulation
+
+simple-mock-server.js
+PURPOSE: Simplified mock server
+CONTENTS:
+- Basic Express setup
+- Essential mock endpoints
+- Development utilities
+
+SOURCE CODE FILES:
+=================
+
+src/index.jsx
+PURPOSE: Application entry point
+CONTENTS:
+- React DOM rendering
+- Redux store provider
+- Root component mounting
+- Web vitals reporting
+
+src/App.jsx
+PURPOSE: Main application component
+CONTENTS:
+- Router configuration
+- Route definitions
+- Authentication route protection
+- Dashboard layout wrapper
+
+src/srvConfig.js
+PURPOSE: Server configuration
+CONTENTS:
+- API base URL configuration
+- Environment-specific settings
+
+src/setupTests.js
+PURPOSE: Test setup configuration
+CONTENTS:
+- Testing library setup
+- Mock configurations
+
+src/reportWebVitals.js
+PURPOSE: Performance monitoring
+CONTENTS:
+- Web vitals measurement
+- Performance reporting
+
+COMPONENT FILES:
+===============
+
+src/components/Alert.jsx
+PURPOSE: Alert/notification component
+CONTENTS:
+- Bootstrap alert styling
+- Multiple alert types
+- Dismissible functionality
+
+src/components/AppModal.jsx
+PURPOSE: Modal dialog component
+CONTENTS:
+- Bootstrap modal implementation
+- Customizable content
+- Backdrop handling
+
+src/components/AuthComponent.jsx
+PURPOSE: Authentication wrapper component
+CONTENTS:
+- Authentication state checking
+- Loading states
+- Error handling
+
+src/components/Buttons.jsx
+PURPOSE: Button component library
+CONTENTS:
+- Multiple button variants
+- Bootstrap button styling
+- Custom button types
+
+src/components/CardComponent.jsx
+PURPOSE: Card layout component
+CONTENTS:
+- Bootstrap card implementation
+- Flexible content areas
+- Header and footer support
+
+src/components/Inputs.jsx
+PURPOSE: Form input components
+CONTENTS:
+- Text inputs
+- Select dropdowns
+- Checkboxes and radio buttons
+- Form validation support
+
+src/components/Label.jsx
+PURPOSE: Form label component
+CONTENTS:
+- Bootstrap label styling
+- Required field indicators
+- Accessibility attributes
+
+src/components/Loader.jsx
+PURPOSE: Loading spinner component
+CONTENTS:
+- Multiple spinner types
+- Customizable sizes
+- Loading state management
+
+src/components/Paginate.jsx
+PURPOSE: Pagination component
+CONTENTS:
+- Page navigation
+- Items per page selection
+- Total count display
+
+DASHBOARD COMPONENTS:
+====================
+
+src/components/dashboard/DashboardComponent.jsx
+PURPOSE: Main dashboard layout wrapper
+CONTENTS:
+- Sidebar navigation
+- Header with notifications
+- Profile management
+- Responsive layout structure
+
+src/components/dashboard/Sidebar.jsx
+PURPOSE: Navigation sidebar
+CONTENTS:
+- Menu items
+- Active state management
+- Collapsible sections
+- Icon integration
+
+src/components/dashboard/SidebarLink.jsx
+PURPOSE: Sidebar navigation links
+CONTENTS:
+- Link styling
+- Active state indicators
+- Icon support
+- Click handlers
+
+src/components/dashboard/NotificationComponent.jsx
+PURPOSE: Notification system
+CONTENTS:
+- Notification display
+- Real-time updates
+- Notification types
+- Dismiss functionality
+
+src/components/dashboard/ProfilePane.jsx
+PURPOSE: User profile management
+CONTENTS:
+- User information display
+- Profile editing
+- Logout functionality
+- Settings access
+
+src/components/dashboard/TabComponent.jsx
+PURPOSE: Tab navigation component
+CONTENTS:
+- Tab switching
+- Content area management
+- Active tab highlighting
+
+src/components/dashboard/Dropdown.jsx
+PURPOSE: Dropdown menu component
+CONTENTS:
+- Menu options
+- Click handlers
+- Styling customization
+
+CHART COMPONENTS:
+================
+
+src/components/charts/PieChart.jsx
+PURPOSE: Circular data visualization
+CONTENTS:
+- ApexCharts pie chart
+- Data formatting
+- Color schemes
+- Interactive features
+
+src/components/charts/VerticalChart.jsx
+PURPOSE: Vertical bar chart
+CONTENTS:
+- ApexCharts bar chart
+- Data series handling
+- Axis configuration
+- Responsive design
+
+src/components/charts/HorizontalChart.jsx
+PURPOSE: Horizontal bar chart
+CONTENTS:
+- ApexCharts horizontal bar chart
+- Category labels
+- Value formatting
+- Animation settings
+
+src/components/charts/MultiLine.jsx
+PURPOSE: Multi-series line chart
+CONTENTS:
+- ApexCharts line chart
+- Multiple data series
+- Time series support
+- Legend configuration
+
+src/components/charts/MultiBar.jsx
+PURPOSE: Multi-series bar chart
+CONTENTS:
+- ApexCharts grouped bar chart
+- Multiple categories
+- Color coding
+- Data comparison
+
+src/components/charts/BoxPlot.jsx
+PURPOSE: Statistical box plot
+CONTENTS:
+- ApexCharts box plot
+- Statistical data visualization
+- Outlier detection
+- Quartile display
+
+src/components/charts/CircularProgressbar.jsx
+PURPOSE: Circular progress indicator
+CONTENTS:
+- Progress visualization
+- Percentage display
+- Color coding
+- Animation effects
+
+src/components/charts/SpiralChart.jsx
+PURPOSE: Spiral data visualization
+CONTENTS:
+- Custom spiral chart
+- Data point plotting
+- Interactive features
+- Visual effects
+
+src/components/charts/SingleSpiral.jsx
+PURPOSE: Single spiral chart
+CONTENTS:
+- Simplified spiral visualization
+- Single data series
+- Basic interactivity
+
+src/components/charts/BoxWhisker.jsx
+PURPOSE: Box and whisker plot
+CONTENTS:
+- Statistical visualization
+- Data distribution
+- Outlier markers
+- Range indicators
+
+src/components/charts/BoxAndWhiskers.js
+PURPOSE: Box and whisker chart utility
+CONTENTS:
+- Chart calculation functions
+- Data processing utilities
+- Statistical computations
+
+src/components/charts/more-horizontal.svg
+PURPOSE: Horizontal menu icon
+CONTENTS:
+- SVG icon definition
+- Styling properties
+
+PAGE COMPONENTS:
+===============
+
+src/pages/pages.jsx
+PURPOSE: Page component exports
+CONTENTS:
+- Centralized page imports
+- Component exports
+- Lazy loading setup
+
+src/pages/dashboard/Overview.jsx
+PURPOSE: Main dashboard overview
+CONTENTS:
+- Key metrics display
+- Summary statistics
+- Quick actions
+- Recent activity
+
+src/pages/dashboard/DashboardTab.jsx
+PURPOSE: Tabbed dashboard interface
+CONTENTS:
+- Multiple dashboard views
+- Tab navigation
+- Content switching
+- Data filtering
+
+src/pages/dashboard/Foster.jsx
+PURPOSE: Foster care analytics
+CONTENTS:
+- Foster care metrics
+- Chart visualizations
+- Data tables
+- Filtering options
+
+src/pages/dashboard/InHome.jsx
+PURPOSE: In-home services data
+CONTENTS:
+- In-home service metrics
+- Performance indicators
+- Trend analysis
+- Reporting features
+
+src/pages/dashboard/OutHome.jsx
+PURPOSE: Out-of-home services data
+CONTENTS:
+- Out-of-home service metrics
+- Placement statistics
+- Outcome measures
+- Comparative analysis
+
+REDUX FILES:
+===========
+
+src/reduxes/store.js
+PURPOSE: Redux store configuration
+CONTENTS:
+- Store setup
+- Middleware configuration
+- DevTools integration
+- Root reducer combination
+
+src/reduxes/localStorage.js
+PURPOSE: Local storage utilities
+CONTENTS:
+- Storage helpers
+- Data persistence
+- State serialization
+
+src/reduxes/actions/auth.js
+PURPOSE: Authentication actions
+CONTENTS:
+- Login actions
+- Logout actions
+- Password reset
+- Session management
+
+src/reduxes/actions/user.js
+PURPOSE: User management actions
+CONTENTS:
+- User CRUD operations
+- Profile management
+- Activity tracking
+- Permission handling
+
+src/reduxes/actions/data.js
+PURPOSE: Data fetching actions
+CONTENTS:
+- API data fetching
+- Chart data loading
+- Dashboard data management
+- Error handling
+
+src/reduxes/actions/setting.js
+PURPOSE: Settings actions
+CONTENTS:
+- Application settings
+- User preferences
+- Configuration management
+- Theme settings
+
+src/reduxes/actions/history.js
+PURPOSE: Navigation history
+CONTENTS:
+- Browser history management
+- Navigation tracking
+- Route history
+
+src/reduxes/reducers/authReducer.jsx
+PURPOSE: Authentication state management
+CONTENTS:
+- Authentication state
+- User session data
+- Loading states
+- Error handling
+
+src/reduxes/reducers/userReducer.jsx
+PURPOSE: User data state management
+CONTENTS:
+- User list management
+- Current user data
+- User profiles
+- Activity data
+
+src/reduxes/reducers/dataReducer.jsx
+PURPOSE: Application data state
+CONTENTS:
+- Dashboard data
+- Chart data
+- Report data
+- Loading states
+
+src/reduxes/reducers/rootReducer.jsx
+PURPOSE: Combined reducers
+CONTENTS:
+- Reducer combination
+- State structure
+- Root state definition
+
+src/reduxes/reducers/types.js
+PURPOSE: Action type constants
+CONTENTS:
+- Action type definitions
+- Type constants
+- Action creators
+
+ROUTER FILES:
+============
+
+src/router/routes.jsx
+PURPOSE: Route configuration
+CONTENTS:
+- Route constants
+- URL definitions
+- Route mapping
+
+src/router/AuthRoute.jsx
+PURPOSE: Protected route component
+CONTENTS:
+- Authentication checking
+- Route protection
+- Redirect logic
+- Loading states
+
+src/router/UnAuthRoute.jsx
+PURPOSE: Public route component
+CONTENTS:
+- Public route handling
+- Authentication redirects
+- Guest access management
+
+================================================================================
+5. ARCHITECTURE OVERVIEW
+================================================================================
+
+APPLICATION ARCHITECTURE:
+========================
+
+The Enterprise Dashboard follows a modern React application architecture with the following layers:
+
+1. PRESENTATION LAYER
+   - React components for UI rendering
+   - Bootstrap for styling and responsive design
+   - ApexCharts for data visualization
+   - Custom component library
+
+2. STATE MANAGEMENT LAYER
+   - Redux for global state management
+   - Redux Toolkit for simplified Redux usage
+   - Local storage for data persistence
+   - Action creators for state mutations
+
+3. DATA LAYER
+   - GraphQL for API communication
+   - Apollo Client for GraphQL operations
+   - Axios for REST API calls
+   - Mock servers for development
+
+4. ROUTING LAYER
+   - React Router for client-side routing
+   - Protected routes for authentication
+   - History management
+   - Navigation guards
+
+5. UTILITY LAYER
+   - Helper functions
+   - Configuration management
+   - Error handling
+   - Performance monitoring
+
+COMPONENT ARCHITECTURE:
+======================
+
+- FUNCTIONAL COMPONENTS: All components use React hooks
+- CONTAINER/PRESENTATIONAL PATTERN: Separation of logic and presentation
+- HIGHER-ORDER COMPONENTS: For authentication and route protection
+- COMPOSITION PATTERN: Reusable component composition
+
+STATE MANAGEMENT ARCHITECTURE:
+=============================
+
+- SINGLE SOURCE OF TRUTH: Centralized Redux store
+- IMMUTABLE UPDATES: Using Redux Toolkit
+- NORMALIZED STATE: Optimized data structure
+- SELECTORS: Efficient state access
+
+================================================================================
+6. SETUP & INSTALLATION
+================================================================================
+
+PREREQUISITES:
+=============
+• Node.js 16 or higher
+• npm or yarn package manager
+• Git version control
+• Docker (for containerized development)
+
+LOCAL DEVELOPMENT SETUP:
+=======================
+
+Step 1: Clone Repository
+------------------------
+git clone https://kbroIntern@bitbucket.org/kbroteam/enterprise-dashboard.git
+cd enterprise-dashboard
+
+Step 2: Install Dependencies
+---------------------------
+npm install
+
+Step 3: Environment Configuration
+--------------------------------
+cp .env.example .env
+# Edit .env file with your configuration
+
+Step 4: Start Development Server
+-------------------------------
+npm start
+# Application will be available at http://localhost:3005
+
+AVAILABLE SCRIPTS:
+=================
+
+| Script | Description |
+|--------|-------------|
+| npm start | Start development server |
+| npm run build | Build for production |
+| npm run lint | Run ESLint with auto-fix |
+| npm run format | Format code with Prettier |
+| npm run watch:css | Watch and compile SCSS |
+
+ENVIRONMENT VARIABLES:
+=====================
+
+Required environment variables:
+• API_BASE_URL: Backend API URL
+• ENV_MODE: Environment mode (development/production)
+• PUBLIC_URL: Public URL for the application
+
+================================================================================
+7. DEVELOPMENT WORKFLOW
+================================================================================
+
+CODE STANDARDS:
+==============
+
+File Naming Conventions:
+• React components: .jsx extension
+• Utility files: .js extension
+• Styles: .scss extension
+• Configuration files: .json extension
+
+Component Structure:
+```jsx
+/** @format */
+import React from 'react';
+import PropTypes from 'prop-types';
+
+const ComponentName = ({ prop1, prop2 }) => {
+  // Component logic here
+  
+  return (
+    <div>
+      {/* JSX content */}
+    </div>
+  );
+};
+
+ComponentName.propTypes = {
+  prop1: PropTypes.string.isRequired,
+  prop2: PropTypes.number,
+};
+
+export default ComponentName;
+```
+
+Import Aliases:
+• @components → src/components
+• @pages → src/pages
+• @reduxes → src/reduxes
+• @utils → src/utils
+• @assets → src/assets
+• @graphql → src/graphql
+• @router → src/router
+
+GIT WORKFLOW:
+============
+
+Branch Naming:
+• Feature branches: feature/description
+• Bug fixes: fix/description
+• Hotfixes: hotfix/description
+
+Commit Message Format:
+```
+type: subject
+
+body
+
+footer
+```
+
+Commit Types:
+• feat: New feature
+• fix: Bug fix
+• docs: Documentation changes
+• style: Code formatting
+• refactor: Code refactoring
+• test: Test changes
+• chore: Build/tool changes
+
+DEVELOPMENT PROCESS:
+===================
+
+1. Create feature branch from master
+2. Implement feature with proper testing
+3. Run linting and formatting
+4. Commit changes with proper messages
+5. Push to remote branch
+6. Create pull request
+7. Code review and approval
+8. Merge to master
+
+================================================================================
+8. COMPONENT DOCUMENTATION
+================================================================================
+
+CORE COMPONENTS:
+===============
+
+DashboardComponent
+Location: src/components/dashboard/DashboardComponent.jsx
+Purpose: Main layout wrapper for authenticated pages
+Features:
+• Sidebar navigation
+• Header with notifications
+• Profile management
+• Responsive layout
+• Authentication state checking
+
+Chart Components:
+Location: src/components/charts/
+Available Charts:
+• PieChart.jsx: Circular data visualization
+• VerticalChart.jsx: Bar charts
+• HorizontalChart.jsx: Horizontal bar charts
+• MultiLine.jsx: Line charts
+• BoxPlot.jsx: Statistical box plots
+• CircularProgressbar.jsx: Progress indicators
+• SpiralChart.jsx: Spiral data visualization
+• MultiBar.jsx: Multi-series bar charts
+
+Form Components:
+Location: src/components/
+• Inputs.jsx: Form input components
+• Buttons.jsx: Button components
+• Alert.jsx: Alert/notification components
+• AppModal.jsx: Modal dialog components
+• Label.jsx: Form label components
+• CardComponent.jsx: Card layout components
+
+Utility Components:
+• Loader.jsx: Loading spinner components
+• Paginate.jsx: Pagination components
+• AuthComponent.jsx: Authentication wrapper
+
+PAGE COMPONENTS:
+===============
+
+Authentication Pages:
+• Login.jsx: User login form
+• ForgotPassword.jsx: Password recovery
+• ResetPassword.jsx: Password reset
+
+Dashboard Pages:
+• Overview.jsx: Main dashboard overview
+• DashboardTab.jsx: Tabbed dashboard interface
+• Foster.jsx: Foster care analytics
+• InHome.jsx: In-home services data
+• OutHome.jsx: Out-of-home services data
+
+User Management:
+• Users.jsx: User listing and management
+• UserProfile.jsx: Individual user profiles
+• UserActivity.jsx: User activity tracking
+
+Settings:
+• Settings.jsx: Application configuration
+
+================================================================================
+9. STATE MANAGEMENT
+================================================================================
+
+REDUX STORE STRUCTURE:
+=====================
+
+Actions (src/reduxes/actions/):
+• auth.js: Authentication actions
+• user.js: User management actions
+• data.js: Data fetching actions
+• setting.js: Settings actions
+• history.js: Navigation history
+
+Reducers (src/reduxes/reducers/):
+• authReducer.jsx: Authentication state
+• userReducer.jsx: User data state
+• dataReducer.jsx: Application data state
+• rootReducer.jsx: Combined reducers
+
+Store Configuration:
+```javascript
+// src/reduxes/store.js
+import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from './reducers/rootReducer';
+import logger from 'redux-logger';
+
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(logger),
+  devTools: process.env.NODE_ENV !== 'production',
+});
+```
+
+State Structure:
+```javascript
+{
+  auth: {
+    isAuthenticated: boolean,
+    user: object,
+    token: string,
+    loading: boolean
+  },
+  user: {
+    users: array,
+    currentUser: object,
+    loading: boolean
+  },
+  data: {
+    dashboardData: object,
+    charts: object,
+    loading: boolean
+  }
+}
+```
+
+ACTION PATTERNS:
+===============
+
+Authentication Actions:
+• LOGIN_REQUEST: Initiate login
+• LOGIN_SUCCESS: Login successful
+• LOGIN_FAILURE: Login failed
+• LOGOUT: User logout
+• RESET_PASSWORD: Password reset
+
+User Actions:
+• FETCH_USERS: Get user list
+• FETCH_USER_PROFILE: Get user details
+• UPDATE_USER: Update user data
+• DELETE_USER: Remove user
+
+Data Actions:
+• FETCH_DASHBOARD_DATA: Get dashboard data
+• FETCH_CHART_DATA: Get chart data
+• UPDATE_DATA: Update data
+• CLEAR_DATA: Clear data
+
+================================================================================
+10. ROUTING SYSTEM
+================================================================================
+
+ROUTE CONFIGURATION:
+===================
+
+File: src/router/routes.jsx
+```javascript
+const PAGES_URL = {
+  LOGIN: "/",
+  FORGOT: "/forgot",
+  RESET: "/forgot/reset",
+  DASHBOARD: "/dashboard",
+  USERS: "/dashboard/users",
+  USER_PROFILE: "/dashboard/users",
+  USER_ACTIVITY: "/dashboard/users",
+  SETTINGS: "/dashboard/settings"
+};
+```
+
+ROUTE PROTECTION:
+================
+
+AuthRoute:
+• Protects authenticated routes
+• Redirects to login if not authenticated
+• Handles loading states
+• Manages authentication checks
+
+UnAuthRoute:
+• Redirects authenticated users away from auth pages
+• Prevents authenticated users from accessing login
+• Manages guest access
+
+NAVIGATION:
+==========
+
+• Programmatic navigation using history.push()
+• Link-based navigation with React Router
+• Breadcrumb navigation in dashboard
+• Sidebar navigation with active states
+
+ROUTE STRUCTURE:
+===============
+
+Public Routes:
+• / (Login)
+• /forgot (Forgot Password)
+• /forgot/reset/:token (Reset Password)
+
+Protected Routes:
+• /dashboard (Main Dashboard)
+• /dashboard/users (User Management)
+• /dashboard/users/:id (User Profile)
+• /dashboard/users/:id/activity (User Activity)
+• /dashboard/settings (Settings)
+
+================================================================================
+11. API INTEGRATION
+================================================================================
+
+GRAPHQL INTEGRATION:
+===================
+
+Client: Apollo Client 3.13.8
+Features:
+• Query execution
+• Mutation handling
+• Subscription support
+• Error handling
+• Caching strategies
+
+Queries: Located in src/graphql/
+• Dashboard data queries
+• User management queries
+• Chart data queries
+• Settings queries
+
+Mutations:
+• User CRUD operations
+• Authentication mutations
+• Data updates
+• Settings modifications
+
+HTTP CLIENT:
+===========
+
+Axios Configuration:
+• Base URL configuration
+• Request/response interceptors
+• Authentication headers
+• Error handling
+• Request/response logging
+
+API Configuration:
+```javascript
+// src/srvConfig.js
+export const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:3000';
+```
+
+ERROR HANDLING:
+==============
+
+• Centralized error management
+• User-friendly error messages
+• Network error handling
+• Authentication error handling
+• Validation error display
+
+MOCK SERVERS:
+============
+
+Development Mock Server:
+• Express.js server
+• Mock API endpoints
+• Authentication simulation
+• Data generation
+• CORS configuration
+
+Simple Mock Server:
+• Basic Express setup
+• Essential endpoints
+• Development utilities
+
+================================================================================
+12. BUILD & DEPLOYMENT
+================================================================================
+
+DEVELOPMENT BUILD:
+=================
+
+Command: npm start
+Features:
+• Hot reloading enabled
+• Source maps for debugging
+• Development server on port 3005
+• Live reload on file changes
+• Error overlay for debugging
+
+PRODUCTION BUILD:
+================
+
+Command: npm run build
+Features:
+• Optimized bundle in build/ directory
+• Minified JavaScript and CSS
+• Gzip compression
+• Asset optimization
+• Tree shaking for unused code
+
+Build Output:
+```
+build/
+├── bundle.js              # Main JavaScript bundle
+├── main.css               # Compiled CSS
+├── index.html             # HTML template
+└── assets/                # Optimized assets
+```
+
+WEBPACK CONFIGURATION:
+=====================
+
+Entry Point: src/index.jsx
+Module Rules:
+• JavaScript/JSX processing with Babel
+• SCSS compilation with Sass loader
+• Asset handling (images, fonts)
+• SVG processing
+
+Plugins:
+• HtmlWebpackPlugin: HTML generation
+• MiniCssExtractPlugin: CSS extraction
+• CompressionPlugin: Gzip compression
+• Dotenv: Environment variables
+
+Optimization:
+• Code splitting
+• Tree shaking
+• Minification
+• Asset optimization
+
+PERFORMANCE OPTIMIZATION:
+========================
+
+Bundle Size:
+• Dynamic imports for code splitting
+• Optimize images and assets
+• Remove unused dependencies
+• Lazy loading of components
+
+Runtime Performance:
+• React.memo for expensive components
+• useMemo and useCallback hooks
+• Optimize re-renders
+• Virtual scrolling for large lists
+
+================================================================================
+13. DOCKER CONFIGURATION
+================================================================================
+
+DEVELOPMENT DOCKER:
+==================
+
+File: dev.Dockerfile
+```dockerfile
+FROM node:16-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3005
+CMD ["npm", "start"]
+```
+
+Features:
+• Node.js 16 Alpine base image
+• Development dependencies
+• Volume mounting for hot reload
+• Development server configuration
+
+PRODUCTION DOCKER:
+=================
+
+File: Dockerfile
+Features:
+• Multi-stage build process
+• Build environment setup
+• Nginx production server
+• Static file serving
+• Optimized for production
+
+DOCKER COMPOSE:
+==============
+
+File: docker-compose.yml
+Services:
+• enterprise-dashboard: Main application
+• certbot: SSL certificate management
+
+Configuration:
+• Port mappings (3005:3005, 443:443)
+• Volume mounting
+• Environment variables
+• Network configuration
+
+NGINX CONFIGURATION:
+===================
+
+File: nginx.conf
+Features:
+• Server block configuration
+• Static file serving
+• Gzip compression
+• Security headers
+• SSL configuration
+
+DEPLOYMENT COMMANDS:
+===================
+
+Development:
+```bash
+docker-compose up --build
+```
+
+Production:
+```bash
+docker build -t enterprise-dashboard .
+docker run -p 80:80 enterprise-dashboard
+```
+
+================================================================================
+14. CODE QUALITY STANDARDS
+================================================================================
+
+LINTING:
+========
+
+ESLint Configuration (.eslintrc):
+• Parser: @babel/eslint-parser
+• Plugins: React, React Hooks, Import
+• Rules: Code quality, import order, React best practices
+
+Rules Include:
+• React hooks rules
+• Import order enforcement
+• Code quality standards
+• Accessibility guidelines
+
+FORMATTING:
+==========
+
+Prettier Configuration (.prettierrc):
+• Tab width: 2 spaces
+• Single quotes
+• Semicolons required
+• Trailing commas
+
+Format on Save: Recommended for consistent code style
+
+PRE-COMMIT CHECKS:
+==================
+
+Required Checks:
+• Lint all files
+• Format code
+• Run tests (if available)
+• Check for console errors
+
+CODE REVIEW GUIDELINES:
+======================
+
+Review Criteria:
+1. Functionality: Does the code work as intended?
+2. Performance: Are there any performance issues?
+3. Security: Are there security vulnerabilities?
+4. Maintainability: Is the code readable and maintainable?
+5. Testing: Are there appropriate tests?
+
+REVIEW PROCESS:
+==============
+
+1. Code review by at least one team member
+2. Address all review comments
+3. Ensure all checks pass
+4. Merge only after approval
+
+TESTING STRATEGY:
+================
+
+Unit Testing:
+• Component testing
+• Utility function testing
+• Redux action/reducer testing
+
+Integration Testing:
+• API integration testing
+• User flow testing
+• Cross-component testing
+
+Manual Testing:
+• User interface testing
+• Cross-browser testing
+• Mobile responsiveness testing
+
+================================================================================
+15. TROUBLESHOOTING GUIDE
+================================================================================
+
+COMMON ISSUES:
+=============
+
+Development Server Issues:
+```bash
+# Clear node_modules and reinstall
+rm -rf node_modules package-lock.json
+npm install
+
+# Clear webpack cache
+rm -rf build/
+npm start
+```
+
+Build Issues:
+```bash
+# Check for linting errors
+npm run lint
+
+# Clear build cache
+rm -rf build/
+npm run build
+```
+
+Docker Issues:
+```bash
+# Rebuild Docker image
+docker-compose down
+docker-compose up --build
+
+# Clear Docker cache
+docker system prune -a
+```
+
+Port Conflicts:
+If port 3005 is in use:
+```bash
+# Find process using port
+lsof -i :3005
+
+# Kill process
+kill -9 <PID>
+```
+
+PERFORMANCE ISSUES:
+==================
+
+Bundle Size Issues:
+• Check for unused dependencies
+• Implement code splitting
+• Optimize images and assets
+• Use dynamic imports
+
+Runtime Performance:
+• Check for unnecessary re-renders
+• Implement React.memo
+• Use useMemo and useCallback
+• Optimize expensive operations
+
+DEBUGGING:
+==========
+
+Development Tools:
+• React Developer Tools
+• Redux DevTools
+• Browser Developer Tools
+• Network tab for API calls
+
+Logging:
+• Console logging in development
+• Error boundaries for production
+• Centralized error tracking
+• Performance monitoring
+
+ERROR HANDLING:
+==============
+
+Common Errors:
+• Network errors: Check API connectivity
+• Authentication errors: Verify credentials
+• Build errors: Check dependencies
+• Runtime errors: Check browser console
+
+Error Resolution:
+• Check error messages
+• Review recent changes
+• Verify environment configuration
+• Test in different browsers
+
+================================================================================
+16. MAINTENANCE & SUPPORT
+================================================================================
+
+GETTING HELP:
+============
+
+1. Check this documentation
+2. Review existing issues
+3. Check project README
+4. Contact project maintainers
+
+CONTRIBUTING:
+============
+
+Guidelines:
+1. Follow coding standards
+2. Write meaningful commit messages
+3. Test changes thoroughly
+4. Submit pull requests for review
+
+Process:
+1. Fork the repository
+2. Create feature branch
+3. Make changes
+4. Test thoroughly
+5. Submit pull request
+6. Address review comments
+7. Merge after approval
+
+VERSION CONTROL:
+===============
+
+Branch Strategy:
+• Main branch: master
+• Development branch: develop
+• Feature branches: feature/*
+• Hotfix branches: hotfix/*
+
+Release Process:
+1. Create release branch
+2. Update version numbers
+3. Update changelog
+4. Create release tag
+5. Deploy to production
+
+MAINTENANCE TASKS:
+==================
+
+Regular Maintenance:
+• Update dependencies
+• Security patches
+• Performance monitoring
+• Bug fixes
+• Feature updates
+
+Monitoring:
+• Application performance
+• Error tracking
+• User analytics
+• Server monitoring
+• Security monitoring
+
+BACKUP & RECOVERY:
+==================
+
+Data Backup:
+• Database backups
+• Configuration backups
+• User data backups
+• System state backups
+
+Recovery Procedures:
+• Disaster recovery plan
+• Data restoration procedures
+• System recovery steps
+• Rollback procedures
+
+SECURITY:
+=========
+
+Security Measures:
+• Authentication and authorization
+• Input validation
+• XSS protection
+• CSRF protection
+• Secure headers
+
+Security Monitoring:
+• Vulnerability scanning
+• Security audits
+• Access logging
+• Incident response
+
+================================================================================
+
+DOCUMENTATION VERSION: 1.0.0
+LAST UPDATED: [Current Date]
+MAINTAINED BY: Development Team
+
+For questions or updates to this documentation, please contact the project maintainers.
+
+================================================================================ 

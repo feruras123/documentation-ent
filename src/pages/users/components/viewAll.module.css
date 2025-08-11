@@ -1,0 +1,84 @@
+.filterContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.inputEl {
+    width: 170px;
+    height: 35px;
+    border-radius: 9px;
+    margin-left: 12px;
+    background-color: rgb(236, 236, 236)
+}
+
+
+.dropdown {
+    width: 180px;
+    height: 35px;
+    font-weight:400!important;
+    border-radius: 9px;
+    border-color: #ced4da;
+    margin-left: 12px;
+    background-color: rgb(236, 236, 236);
+    margin-bottom:3px;
+    padding:auto;
+    color: #717880;
+}
+
+
+
+.dropdownDesc{
+    margin-top: 3px;
+    font-weight: 50;
+    font-size: 14px;
+}
+
+
+
+.dropdownMenu {
+    width: 180px;
+}
+
+.messageHeader {
+    color: #8a8a8a!important;
+    font-size: 10px!important;
+    font-weight:400!important;
+    margin-bottom: 2px;
+    letter-spacing: 0.6px;
+}
+
+.messageBody{
+    font-size:12px;
+    margin-bottom: 0px;
+}
+
+.historyHeadline {
+    font-size: 13px;
+    margin-top:10px;
+    margin-bottom:10px;
+    letter-spacing:0.6px;
+}
+
+.messageCard {
+    border-radius: 10px!important;
+}
+
+.modal{
+   margin-top: 20%!important;
+   border-radius: 8px!important;
+}
+
+.messageHeaderInfo {
+    font-size: 12px!important;
+    min-width:90px;
+    margin-left:10px;
+}
+
+.horizontalRule {
+    width:90%;
+}
+
+.bodyText{
+    margin-left:10px;
+}

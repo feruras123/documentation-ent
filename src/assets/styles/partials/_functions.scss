@@ -1,0 +1,109 @@
+/** @format */
+@use "sass:math";
+@use "sass:color";
+@use "sass:list";
+@use "sass:map";
+
+/**
+* A functions that creates responsive containers and fontsizes according
+* to browser size. $bigVal is the value it should take on desktop and $smallVal
+* is the value for mobile. Intermediate values are created according to screen
+* sizes
+*/
+
+$root-size: 16px;
+
+@function rfs($bigVal: $root-size, $smallVal: 12) {
+	@return (
+		calc(
+			#{$smallVal}px + (#{$bigVal - $smallVal}) *
+				(((100vw - 375px) / (1440 - 375)))
+		)
+	);
+}
+
+/**
+* Modern responsive function using clamp() for better performance
+*/
+@function responsive($min, $preferred, $max) {
+  @return clamp(#{$min}, #{$preferred}, #{$max});
+}
+
+/**
+* Converts a value from pixels to em
+*/
+@function em($val) {
+	@return #{$val/ $root-size}em;
+}
+
+/**
+* Converts a value from pixels to rem
+*/
+@function rem($val) {
+	@return #{$val/ $root-size}rem;
+}
+
+/**
+* Modern color manipulation functions
+*/
+@function color-lighten($color, $amount) {
+  @return color.adjust($color, $lightness: $amount);
+}
+
+@function color-darken($color, $amount) {
+  @return color.adjust($color, $lightness: -$amount);
+}
+
+@function color-alpha($color, $alpha) {
+  @return color.change($color, $alpha: $alpha);
+}
+
+/**
+* Spacing scale function
+*/
+@function spacing($scale) {
+  $spacing-map: (
+    0: 0,
+    1: 0.25rem,
+    2: 0.5rem,
+    3: 0.75rem,
+    4: 1rem,
+    5: 1.25rem,
+    6: 1.5rem,
+    8: 2rem,
+    10: 2.5rem,
+    12: 3rem,
+    16: 4rem,
+    20: 5rem,
+    24: 6rem,
+    32: 8rem,
+  );
+  
+  @return map.get($spacing-map, $scale, 1rem);
+}
+
+/**
+* Z-index scale function
+*/
+@function z($layer) {
+  $z-map: (
+    "dropdown": 1000,
+    "sticky": 1020,
+    "fixed": 1030,
+    "modal-backdrop": 1040,
+    "modal": 1050,
+    "popover": 1060,
+    "tooltip": 1070,
+  );
+  
+  @return map.get($z-map, $layer, 1);
+}
+
+/**
+* Modern aspect ratio function
+*/
+@function aspect-ratio($width, $height) {
+  @return math.div($height, $width) * 100%;
+}
+
+

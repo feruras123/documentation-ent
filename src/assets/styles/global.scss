@@ -1,0 +1,263 @@
+/** @format */
+
+@import "./partials/variables";
+@import "./partials/mixins";
+@import "./partials/functions";
+
+html {
+	font-size: responsive(14px, 16px, 18px) !important;
+	font-family: $font-family-base;
+	color: var(--color-text);
+	background-color: var(--color-background);
+
+	@media (min-width: 1440px) {
+		font-size: 16px !important;
+	}
+}
+
+body {
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.shrink {
+	flex: 1 !important;
+}
+
+.fw-bold {
+	font-weight: 600 !important;
+}
+
+.fw-medium {
+	font-weight: 500 !important;
+}
+
+.fw-normal {
+	font-weight: 400 !important;
+}
+
+.fw-light {
+	font-weight: 300 !important;
+}
+
+.align-items-base {
+	align-items: baseline;
+}
+
+.lh-initial {
+	line-height: initial;
+}
+
+.d-center {
+	@include flex-center;
+}
+
+.x-small {
+	font-size: 0.75rem !important;
+}
+
+.xs-small {
+	font-size: 0.5rem !important;
+}
+
+.avatar-gradient {
+	background: conic-gradient(
+		from 127.48deg at 50% 50%,
+		#4130ff 0deg,
+		#50caff 76.65deg,
+		#12ec69 149.77deg,
+		#ffc658 224.77deg,
+		#ff006b 290.4deg,
+		#4130ff 360deg
+	);
+	box-shadow: var(--shadow-sm);
+	width: 36px;
+	height: 36px;
+	@extend .d-center;
+	border-radius: var(--radius-full);
+
+	& > div {
+		width: 30px;
+		height: 30px;
+		@extend .d-center;
+		border-radius: var(--radius-full);
+		font-size: 1rem;
+		font-weight: 700;
+	}
+}
+
+.auth {
+	&-logo {
+		width: responsive(200px, 200px, 250px);
+		top: responsive(-10px, -20px, -30px);
+		@media (min-width: 1440px) {
+			width: 200px;
+			top: -20px;
+		}
+	}
+
+	&-section-left {
+		@media (min-width: 992px) {
+			border-left: 0.5px solid var(--color-primary);
+		}
+	}
+
+	&-section-right {
+		@media (min-width: 992px) {
+			border-right: 0.5px solid var(--color-primary);
+		}
+	}
+
+	&-footer {
+		bottom: var(--spacing-lg);
+	}
+}
+
+.Toastify__toast--success {
+	background-color: var(--color-primary) !important;
+	font-weight: 700 !important;
+	max-height: 20px !important;
+	font-size: 0.8rem;
+}
+
+.Toastify__toast--error {
+	background-color: var(--color-danger) !important;
+	font-weight: 700 !important;
+	font-size: 0.8rem;
+}
+
+.Toastify__progress-bar {
+	visibility: hidden;
+}
+
+@media (min-width: 1440px) {
+	.auth__section {
+		width: 480px;
+	}
+}
+
+h1,
+h2,
+h3 {
+	@extend .fw-bold;
+	@include responsive-text(1.5rem, 2.5rem);
+}
+
+.small {
+	font-size: 0.875rem;
+}
+
+.x-small {
+	font-size: 0.75rem;
+}
+
+label,
+.lead {
+	font-size: responsive(1rem, 1.125rem, 1.25rem) !important;
+
+	&.small {
+		font-size: 1rem !important;
+	}
+
+	&.x-small {
+		font-size: 0.875rem !important;
+	}
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.shadow {
+	box-shadow: var(--shadow-md) !important;
+}
+
+.roundless {
+	border-radius: 0 !important;
+}
+
+.borderless {
+	border: none !important;
+}
+
+.select-icon {
+	top: 0;
+}
+
+.modal {
+	&-content {
+		border-radius: var(--radius-xl) !important;
+		@include card-base;
+	}
+}
+
+.bg-light {
+	background-color: var(--color-light) !important;
+}
+
+.border {
+	&-sm {
+		border: 2px solid var(--color-dark) !important;
+	}
+}
+
+.text-uppercase {
+	text-transform: capitalize !important;
+}
+
+.h-90 {
+	height: 90% !important;
+}
+
+// Modern responsive typography
+.responsive-heading {
+	@include responsive-text(1.5rem, 3rem);
+}
+
+.responsive-body {
+	@include responsive-text(0.875rem, 1.125rem);
+}
+
+// Modern glass morphism components
+.glass-card {
+	@include glass-effect;
+	@include card-base;
+}
+
+// Modern gradient components
+.gradient-card {
+	@include gradient-primary;
+	border-radius: var(--radius-lg);
+	padding: var(--spacing-lg);
+	color: white;
+}
+
+// Modern focus management
+.focus-visible {
+	@include focus-ring;
+}
+
+// Modern accessibility improvements
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+// Modern high contrast support
+@media (prefers-contrast: high) {
+	:root {
+		--color-text: #000000;
+		--color-background: #ffffff;
+		--color-border: #000000;
+	}
+}

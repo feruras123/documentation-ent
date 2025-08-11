@@ -1,0 +1,116 @@
+.container {
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.subContainer {
+    display:flex;
+    flex-direction:row;
+    align-items:baseline;
+    justify-content:space-between;
+}
+
+.formStyle {
+    width:75%;
+}
+
+.labelstyle {
+    width: 90%!important;
+}
+
+.submitbtn {
+    background-color: #8a92c5!important;
+    height:30px;
+    font-size: 11px!important;
+    margin-left: 5px;
+    border-radius: 9px!important;
+}
+
+.uploadContainer {
+    display:flex;
+    justify-content:center;
+    min-height: 30px;
+    max-width:180px;
+    background-color: #f7f7f7;
+    color: black;
+    border: 1px solid #cecece;
+    height:auto;
+    width: auto;
+    text-align: center;
+    position: relative;
+    font-size:11px;
+    margin-top:auto;
+    border-radius:9px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.listItem{
+    margin-top:10px;
+    list-style: none;
+    max-width:180px;
+    font-size: 11px;
+    color: #cecece;
+    margin-left:auto;
+    margin-right: auto;
+
+}
+
+.cancelBtn {
+    background-color: white!important;
+    color:darkslategrey!important;
+    font-size: 11px!important;
+    height: 30px!important;
+    margin-left: auto;
+    left:60%;
+    border-radius: 9px!important;
+}
+
+.submitBtnContainer {
+    display:flex;
+    justify-content:flex-end;
+    align-items:baseline;
+}
+
+.inputEl {
+    width: 193px!important;
+}
+
+.fileUpload{
+    background-color: white!important;
+    font-size: 11px!important;
+    color: darkslategrey!important;
+    width: 100%!important;
+    opacity:0!important;
+    height: 100%!important;
+    position: absolute!important;
+}
+
+.uploadButtonText {
+    position: absolute;
+    margin-top:7px;
+    
+}
+
+.paperclip {
+    position: absolute;
+    left:14px;
+    margin-top:8px;
+}
+
+.dropdown {
+    display:flex!important;
+    justify-content:space-between!important;
+    background-color: white!important;
+    color: darkslategrey!important;
+    height: 30px;
+    font-size: 11px!important;
+    border-radius: 9px!important;
+    border-color: #49505750!important;
+    width: 193px!important;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    text-align:left!important;
+    font-style: italic!important;
+    align-items:baseline!important;
+}

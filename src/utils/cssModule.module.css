@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    height: 100vh;
+    justify-content:center;
+    align-items:center;
+}
+
+.modalOverride {
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    padding-top:60vh;
+}
+
+.modalContent {
+    background-color:transparent!important;
+    border:none!important;
+    box-shadow:none!important;
+}
+
+.spinner{
+    background-color:transparent!important;
+}
+
+.headline {
+    text-align:center;
+    color:grey;
+    margin-bottom: 25px;
+    letter-spacing: 5px;
+    margin-left:19px;
+}
+
+.statusMessage {
+    text-align:center;
+    color:grey;
+    margin-top: 25px;
+    letter-spacing: 5px;
+    margin-left:19px;
+    font-size: 12px;
+
+}

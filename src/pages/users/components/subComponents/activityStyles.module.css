@@ -1,0 +1,21 @@
+.container {
+    width: 80%;
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+}
+
+.pic {
+    width: 65px;
+    background-color:rgb(224, 220, 220);
+    border-radius: 7px;
+    margin-right:14px;
+    margin-left: 5px;
+    margin-bottom:15px;
+}
+
+.subheadline {
+    font-size:14px;
+    font-weight:500;
+    
+}

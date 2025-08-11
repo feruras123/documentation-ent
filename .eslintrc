@@ -1,0 +1,47 @@
+/** @format */
+
+ {
+  "env": {
+    "node": true,
+    "browser": true,
+    "es6": true
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+
+  "plugins": ["react", "import"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    },
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "project": "./jsconfig.json"
+  },
+
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "import/no-unresolved": "off",
+    "react/no-unescaped-entities": 0,
+    "react/prop-types": 0,
+    "no-unused-vars": "off",
+    "linebreak-style": "off",
+    "no-def": "off",
+    "import/no-extraneous-dependencies": "off"
+    // "prettier/prettier": ["error"]
+
+  }
+}

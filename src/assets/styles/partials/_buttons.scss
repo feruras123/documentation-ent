@@ -1,0 +1,9 @@
+/** @format */
+
+@import './variables';
+
+@each $color, $value in $theme-colors {
+  .btn-outline-#{$color} {
+    border-width: 1px !important;
+  }
+}

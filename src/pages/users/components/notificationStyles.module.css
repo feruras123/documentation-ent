@@ -1,0 +1,172 @@
+.dropdown {
+    display:flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+    justify-content: left;
+    width:70%;
+}
+
+.ButtonDropdown {
+    display:flex;
+    flex-direction:column-reverse;
+    margin-bottom: 5px;
+    justify-content: baseline;
+    width:90% !important;
+    margin-left: 23px;
+}
+
+.DropDownMenu {
+width: 100%;
+}
+
+.inputEl {
+    border: none;
+}
+
+.modal{
+    top:50%;
+}
+
+.modalBody {
+    display:flex;
+    flex-direction: column;
+}
+
+.onboardingInput {
+    width: 200px;
+}
+
+.formItemContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.fileUpload {
+    margin-bottom: 35px;
+}
+
+.choiceButton{
+ background-color: white!important;
+ color: black!important;
+ border: 1px solid #ced4da!important;
+ margin-left: 4px;
+ margin-right:4px;
+ font-size: 12px!important;
+}
+
+.choiceButton:active{
+    background-color: #ced4da!important;
+    color: black!important;
+    border: 1px solid #ced4da!important;
+    margin-left: 4px;
+    margin-right:4px;
+    font-size: 12px!important;
+   }
+
+.choiceContainer {
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.gradeBtn {
+    background-color: white!important;
+    color: black!important;
+    border: 1px solid #ced4da!important;
+    margin-left: 1px;
+    margin-right:1px;
+    font-size: 12px!important;
+}
+
+.inputContainer {
+    display:flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+    justify-content: space-between;
+    width:70%;
+}
+
+.masterInputContainer {
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+}
+
+.gradeButtonContainer {
+    align-items:center;
+    margin-top: 20px;
+    margin-bottom:35px;
+}
+
+.gradeBtnActive{
+    background-color: rgb(187, 187, 187)!important;
+    color: black!important;
+    border: 1px solid #ced4da!important;
+    margin-left: 1px;
+    margin-right:1px;
+    font-size: 12px!important;
+}
+
+.operationLog {
+    background-color: rgb(179, 174, 228)!important;
+    color: black!important;
+    border: 1px solid #ced4da!important;
+    margin-left: 1px;
+    margin-right:1px;
+    font-size: 12px!important;
+    width:50%;
+    margin-bottom: 25px;
+}
+
+.submitButtons {
+    background-color: white!important;
+    color: black!important;
+    border: 1px solid #ced4da!important;
+    margin-left: 3px;
+    margin-right:3px;
+    font-size: 12px!important;
+    width:100px;
+}
+
+.upload {
+    background-color: white!important;
+    color: black!important;
+    border: 1px solid #ced4da!important;
+    margin-left: 3px;
+    margin-right:3px;
+    font-size: 12px!important;
+    width:253px;
+    position: absolute;
+    top: -37px;
+    right: 6px;
+}
+
+.editProfile {
+    margin-left: 48px;
+    margin-top: 11px;
+    align-self: flex-start!important;
+}
+
+.icon {
+    width: 16px;
+    margin-right: 5px;
+}
+.deleteButtonContainer{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+}
+
+.textContainer {
+    text-align:center;
+}
+
+.p {
+    font-size: 11px;
+}
+
+.dropdownAccountType {
+    border:none;
+}

@@ -1,0 +1,24 @@
+/**
+ * /*
+ *
+ * @format
+ * @title CSS Declearations
+ * @dscription import all css files in here
+ */
+
+/* Partials For (functions, variables, mixins, buttons, utilities, themes)*/
+@import './partials/functions';
+@import './partials/variables';
+@import './partials/mixins';
+@import './partials/buttons';
+@import './partials/utilities';
+@import './partials/themes';
+
+/* Bootstrap */
+@import 'bootstrap/scss/bootstrap';
+
+/* Local styles */
+@import './global';
+@import './components/form';
+@import './components/table';
+@import './components/dashboard';

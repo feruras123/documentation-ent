@@ -1,0 +1,53 @@
+.filterContainer {
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    width:480px;
+}
+
+.btn {
+    height: 30px;
+    background-color: transparent!important;
+    border: 1px solid #bebebe !important;
+    border-radius: 9px;
+    color: black!important;
+    font-size: 13px!important;
+}
+
+.card{
+    min-height:120px;   
+}
+
+.exportButton {
+    background-color: transparent!important;
+    color: black!important;
+    font-size: 13px!important;
+    border: 1px solid #bebebe;
+    width:120px;
+}
+
+.checkboxContainer {
+    position: relative;
+    display:flex;
+    flex-direction:row;
+    align-items:baseline;
+    margin-bottom:6px;
+}
+
+.checkbox{
+    width:14px;
+    height:14px;
+    margin-left:30px!important;
+    top: -5px;
+}
+.checkbox2{
+    width:16px;
+    height:16px;
+    margin-left:10px;
+    top: -6px;
+}
+
+.label {
+    width:40px;
+    font-size:12px!important;
+}

@@ -1,0 +1,146 @@
+# AUTHOR AHMED AHMED
+#
+
+stages:
+  - analyse
+  - test
+  - build
+  - deploy
+
+
+
+.do_auth: &do_auth
+  before_script:
+    - apk add --update bash wget python3 py3-pip doctl && rm -rf /var/cache/apk/*
+    - doctl auth init  --access-token "$REGISTRY_ACCESS_TOKEN"
+    - doctl registry login
+
+.do_registry: &do_registry
+  script:
+    - ssh $SSH_USERNAME@$SSH_HOST "doctl auth init  --access-token $REGISTRY_ACCESS_TOKEN"
+    - ssh $SSH_USERNAME@$SSH_HOST "doctl registry login"
+    - ssh $SSH_USERNAME@$SSH_HOST "docker stop enterprise-dashboard || true"
+    - ssh $SSH_USERNAME@$SSH_HOST "docker rm enterprise-dashboard || true"
+    - ssh $SSH_USERNAME@$SSH_HOST "docker pull registry.digitalocean.com/yourok/enterprise-dashboard:latest"
+    - ssh $SSH_USERNAME@$SSH_HOST "docker run -d --name enterprise-dashboard -p 8080:80 registry.digitalocean.com/yourok/enterprise-dashboard:latest"
+
+.do_ssh:
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - ssh $SSH_USERNAME@$SSH_HOST
+
+.build:
+  image: alpine:latest
+  script:
+    - docker build -t  registry.digitalocean.com/yourok/enterprise-dashboard:$CI_COMMIT_SHA -t  registry.digitalocean.com/yourok/enterprise-dashboard:latest .
+    - docker push --all-tags  registry.digitalocean.com/yourok/enterprise-dashboard
+    - docker image prune --force --all --filter "until=24h"
+
+analyse:
+  stage: analyse
+  image: oven/bun
+  script:
+    - |
+      bun install
+      bun run lint
+
+test:
+  stage: test
+  image: oven/bun
+  script:
+    - |
+      bun install
+      bun test
+  needs: ["analyse"]
+
+build-testflight:
+  stage: build
+  <<: *do_auth
+  environment: 'staging'
+  script:
+    - cat .env.staging >> .env
+    - !reference ['.build', script]
+  needs: ["test"]
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_COMMIT_BRANCH == "dev"
+
+testflight:
+  stage: deploy
+  environment:
+    name: 'staging'
+    url: 'https://$HOSTNAME'
+  variables:
+    SSH_KEY: $SSH_KEY
+    SSH_USERNAME: $SSH_USERNAME
+    SSH_HOST: $SSH_SERVER
+    ENV_FILE: $ENV_FILE
+    HOSTNAME: $HOSTNAME
+  before_script:
+    - !reference [.do_ssh,  before_script]
+  <<: *do_registry
+  needs: ["build-testflight"]
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_COMMIT_BRANCH == "dev"
+
+build-production:
+  stage: build
+  <<: *do_auth
+  environment: 'production'
+  script:
+    - cat .env.staging >> .env
+    - !reference ['.build', script]
+  needs: ["test"]
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == "legacy"
+
+
+production:
+  stage: deploy
+  when: manual
+  environment:
+    name: 'production'
+    url: 'https://enterprise.yourokapps.com'
+  variables:
+    SSH_KEY: $SSH_KEY
+    SSH_USERNAME: $SSH_USERNAME
+    SSH_HOST: $SSH_SERVER
+    ENV_FILE: $ENV_FILE
+    HOSTNAME: $HOSTNAME
+  before_script:
+    - !reference [.do_ssh,  before_script]
+  <<: *do_registry
+  needs: ["build-production"]
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == "legacy"
+
+gitlab-release:
+  stage: deploy
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - echo "Create release"
+  release:
+    tag_name: 'v0.$CI_PIPELINE_IID'
+    description: 'v0.$CI_PIPELINE_IID'
+    ref: '$CI_COMMIT_SHA'
+  needs: ["production"]
+
